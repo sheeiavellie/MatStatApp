@@ -5,15 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MatStatApp.ViewModels"
         xmlns:local="clr-namespace:MatStatApp"
+
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="600" Width="600"
-        ResizeMode="NoResize">
-    
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    
     <Grid>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Проект">
+                <MenuItem Header="Ввести данные"
+                          Command="{Binding SelectFileCommand}"/>
 
-    </Grid>
+
+
+                <MenuItem Header="Открыть графики">
+                    <MenuItem Header="Гистограмма" 
+                              Command="{Binding ShowGraphCommand}"
+                              CommandParameter="Gist"/>
+                    <MenuItem Header="Эмпиричиская функция" 
+                              Command="{Binding ShowGraphCommand}" 
+                              CommandParameter="EmFunc"/>
+                </MenuItem>
+
+
+
+                    <MenuItem Header="Выполнить функцию">
+                    <ListBox ItemsSource="{Binding Methods}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <MenuItem Header="{Binding}"
+                                          Width="250"
+                                          Command="{Binding DataContext.FunctionCommand, 
+                                    RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                          CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Header="Выход" 
+                          Command="{Binding CloseApplicationCommand}"/>
+
+                <Separator/>
+
+                <MenuItem Header="github.com/sheeiavellie"/>                
+
+            </MenuItem>
+        </Menu>
+        <Border VerticalAlignment="Bottom"
+                Background="White"
+                Height="75">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock  Text="{Binding ResField, 
+                                StringFormat='Результат: {0}'}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="10 0 10 20"
+                       FontSize="8"/>
+                <TextBlock Text="{Binding TextField}" 
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="10 0 10 0"
+                       FontSize="8"/>
+            </StackPanel>
+            
+            
+        </Border>
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="/MatStatApp;component/Data/Resources/Pictures/112.png"/>
+        </Grid.Background>
+    </Grid>    
 </Window>

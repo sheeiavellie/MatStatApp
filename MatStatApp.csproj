@@ -8,9 +8,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
+    <None Remove="Data\Resources\Pictures\112.png" />
+    <None Remove="Data\Resources\Pictures\321.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.701" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MatStat\MatStat.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\Resources\Pictures\112.png" />
+    <Resource Include="Data\Resources\Pictures\321.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Windows\DialogChartEmp.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Windows\DialogChartEmp.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>
