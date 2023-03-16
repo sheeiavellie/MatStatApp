@@ -26,7 +26,7 @@ namespace MatStatApp.ViewModels
             var t = fc.GetGistogrammData(Sample.sample);
 
             gist = new Gistogramm<int>("Значения", "Частота",
-                t.Select(x => x.Item2).OrderBy(x => x).ToArray(),
+                t.Select(x => x.Item2).ToArray(),
                 t.Select(x => x.Item1.ToString()).OrderBy(x => x).ToArray());
         }
     }
