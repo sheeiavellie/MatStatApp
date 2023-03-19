@@ -32,8 +32,11 @@ namespace MatStatApp.Models.Charts
             {
                 new ColumnSeries<X>
                 {
-                    Values = x_vals
-                }
+                   Values = x_vals,
+                   MaxBarWidth = 10,
+                   Padding = 1                   
+                },
+                
             };
 
             XAxes = new Axis[]
@@ -41,8 +44,9 @@ namespace MatStatApp.Models.Charts
                 new Axis
                 {
                     Name = x_name,
-                    TextSize = 18,
+                    NameTextSize = 15,
                     Padding = new Padding(5, 15, 5, 5),
+                    MinStep = 1,
                     SeparatorsPaint = new SolidColorPaint
                     {
                         Color = s_gray,
@@ -67,7 +71,7 @@ namespace MatStatApp.Models.Charts
                 new Axis
                 {
                     Name = y_name,
-                    TextSize = 18,
+                    NameTextSize = 15,
                     Padding = new Padding(5, 0, 15, 0),
                     SeparatorsPaint = new SolidColorPaint
                     {

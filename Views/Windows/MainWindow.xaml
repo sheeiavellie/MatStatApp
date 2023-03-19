@@ -1,89 +1,118 @@
-﻿<Window x:Class="MatStatApp.MainWindow"
+﻿
+    <Window x:Class="MatStatApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:vm="clr-namespace:MatStatApp.ViewModels"
-        xmlns:local="clr-namespace:MatStatApp"
-
+        xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+        xmlns:sys="clr-namespace:System;assembly=netstandard"
+        xmlns:local="clr-namespace:MatStatApp" 
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="600" Width="600"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
-    <Grid>
-        <Menu VerticalAlignment="Top">
-            <MenuItem Header="Проект">
-                <MenuItem Header="Ввести данные"
-                          Command="{Binding SelectFileCommand}"/>
 
 
+    <Border CornerRadius="30">
+        <Border.Background>
+            <ImageBrush ImageSource="/MatStatApp;component/Data/Resources/Pictures/112.png"/>
+        </Border.Background>
+        <Grid>
+            <Border Background="White" Height="30" CornerRadius="30 30 0 0" VerticalAlignment="Top">
+                <Grid>
+                    <Button x:Name="Menu" Style="{StaticResource closeButton}" Margin=" 10 0 0 0" HorizontalAlignment="Left"
+                            >
+                        <Button.Tag>
+                            <Icon:PackIconMaterial Kind="Menu"/>
+                        </Button.Tag>
+                        <Button.ContextMenu>
+                            <ContextMenu x:Name="MainContextMenu"
+                                         DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Mode=Self}}">
+                                <MenuItem Header="Ввести данные" Command="{Binding SelectFileCommand}"/>
+                                <MenuItem Header="Открыть графики">
+                                    <MenuItem Header="Гистограмма" Command="{Binding ShowGraphCommand}" CommandParameter="Gist"/>
+                                    <MenuItem Header="Эмпиричиская функция" Command="{Binding ShowGraphCommand}" CommandParameter="EmFunc"/>
+                                </MenuItem>
+                                <MenuItem Header="Выполнить функцию" ItemsSource="{Binding Methods}" >
+                                    <MenuItem.ItemTemplate >
+                                        <DataTemplate>
+                                            <MenuItem Header="{Binding}" Command="{Binding DataContext.FunctionCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                                      CommandParameter="{Binding}">
+                                                <MenuItem.Icon>
+                                                    <emoji:TextBlock Text="🥶"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                        </DataTemplate>
+                                    </MenuItem.ItemTemplate>
+                                </MenuItem>
 
-                <MenuItem Header="Открыть графики">
-                    <MenuItem Header="Гистограмма" 
-                              Command="{Binding ShowGraphCommand}"
-                              CommandParameter="Gist"/>
-                    <MenuItem Header="Эмпиричиская функция" 
-                              Command="{Binding ShowGraphCommand}" 
-                              CommandParameter="EmFunc"/>
-                </MenuItem>
+                                <Separator/>
 
+                                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
 
+                                <Separator/>
 
-                    <MenuItem Header="Выполнить функцию">
-                    <ListBox ItemsSource="{Binding Methods}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <MenuItem Header="{Binding}"
-                                          Width="250"
-                                          Command="{Binding DataContext.FunctionCommand, 
-                                    RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                          CommandParameter="{Binding}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </MenuItem>
-
-                <Separator/>
-
-                <MenuItem Header="Выход" 
-                          Command="{Binding CloseApplicationCommand}"/>
-
-                <Separator/>
-
-                <MenuItem Header="github.com/sheeiavellie"/>                
-
-            </MenuItem>
-        </Menu>
-        <Border VerticalAlignment="Bottom"
+                                <MenuItem Header="github.com/sheeiavellie"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                        <Button.Triggers>
+                            <EventTrigger SourceName="Menu" RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainContextMenu" Storyboard.TargetProperty="(ContextMenu.IsOpen)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>True</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    
+                    <Button Style="{StaticResource closeButton}" Margin=" 0 0 10 0" HorizontalAlignment="Right"
+                            Command="{Binding CloseApplicationCommand}">
+                        <Button.Tag>
+                            <Icon:PackIconMaterial Kind="Close"/>
+                        </Button.Tag>                        
+                    </Button>
+                </Grid>                
+            </Border>
+            
+            <Border CornerRadius="0 0 30 30" VerticalAlignment="Bottom" 
                 Background="White"
                 Height="75">
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock  Text="{Binding ResField, 
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock  Text="{Binding ResField, 
                                 StringFormat='Результат: {0}'}"
                        TextWrapping="Wrap"
                        TextAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="10 0 10 20"
                        FontSize="8"/>
-                <TextBlock Text="{Binding TextField}" 
+                    <TextBlock Text="{Binding TextField}" 
                        TextWrapping="Wrap"
                        TextAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="10 0 10 0"
                        FontSize="8"/>
-            </StackPanel>
-            
-            
-        </Border>
-        
-        <Grid.Background>
-            <ImageBrush ImageSource="/MatStatApp;component/Data/Resources/Pictures/112.png"/>
-        </Grid.Background>
-    </Grid>    
+                </StackPanel>
+
+
+            </Border>
+        </Grid>
+    </Border>
+    
 </Window>

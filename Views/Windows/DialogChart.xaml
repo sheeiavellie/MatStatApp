@@ -4,32 +4,82 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
              xmlns:local="clr-namespace:MatStatApp.Views.Windows"
+             xmlns:vm="clr-namespace:MatStatApp.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="500"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              MinWidth="500"
              MinHeight="500"
              MaxHeight="500"
              MaxWidth="500">
-    <Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Border Width="400" Height="400" Background="White">
-                <lvc:CartesianChart Margin="20" Width="300" Height="300"
-                Series="{Binding gist.Series}"
-                XAxes="{Binding gist.XAxes}"
-                YAxes="{Binding gist.YAxes}"
-                DrawMarginFrame="{Binding gist.Frame}"
-                ZoomMode="X"
-                TooltipPosition="Hidden">
-                </lvc:CartesianChart>
+    <UserControl.DataContext>
+        <vm:DialogChartViewModel/>
+    </UserControl.DataContext>
+    <Border CornerRadius="25" Background="#FFAEC9">
+        <StackPanel>
+            <Border CornerRadius="25 25 0 0" Height="25" Background="White">
+                <Button Style="{StaticResource closeButton}" Margin=" 0 -1 8 0" HorizontalAlignment="Right" 
+                        Command="{Binding CloseApplicationCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type prism:DialogWindow}}}">
+                    <Button.Tag>
+                        <Icon:PackIconMaterial Kind="Close"/>
+                    </Button.Tag>
+                </Button>
             </Border>
-            
-            
-        </StackPanel>
-        
-        
-        <Grid.Background>
-            <ImageBrush ImageSource="/MatStatApp;component/Data/Resources/Pictures/321.jpg"/>
-        </Grid.Background>
-    </Grid>
+            <Border Width="475" Height="450" Background="White" Margin="0 12.5 0 0" CornerRadius="25">
+                <StackPanel>
+                    <lvc:CartesianChart Margin="0 25 0 0" Width="425" Height="200" 
+                        Series="{Binding gist.Series}"
+                        XAxes="{Binding gist.XAxes}"
+                        YAxes="{Binding gist.YAxes}"
+                        DrawMarginFrame="{Binding gist.Frame}"
+                        ZoomMode="None"
+                        TooltipPosition="Hidden">
+                    </lvc:CartesianChart>
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Table}"
+                              ColumnWidth="*"
+                              HeadersVisibility="Column"
+                              Width="425"
+                              Margin="0 20 0 0"
+                              GridLinesVisibility="None"
+                              MaxHeight="180"
+                              MinHeight="180"
+                              VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Item1, Mode=OneWay}" Header="Значение">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Item2, Mode=OneWay}" Header="Частота">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                
+            </Border>
+        </StackPanel>        
+    </Border>
+    
 </UserControl>
