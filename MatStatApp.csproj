@@ -28,4 +28,17 @@
     <Resource Include="Data\Resources\Pictures\321.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Windows\EmpChart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Windows\EmpChart.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

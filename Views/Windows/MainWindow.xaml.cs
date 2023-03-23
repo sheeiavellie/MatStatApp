@@ -13,7 +13,7 @@ namespace MatStatApp
             InitializeComponent();
 
             DialogService.RegisterDialog<DialogChart, DialogChartViewModel>();
-            //DialogService.RegisterDialog<DialogChartEmp, DialogChartEmpViewModel>();
+            DialogService.RegisterDialog<EmpChart, EmpChartViewModel>();
 
             MainContextMenu.PlacementTarget = Menu;
         }

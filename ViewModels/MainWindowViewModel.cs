@@ -113,7 +113,7 @@ namespace MatStatApp.ViewModels
             }
             else
             {
-                //_dialogService.ShowDialog<DialogChartEmpViewModel>(result => { var test = result; });
+                _dialogService.ShowDialog<EmpChartViewModel>(result => { var test = result; });
             }
 
         }
