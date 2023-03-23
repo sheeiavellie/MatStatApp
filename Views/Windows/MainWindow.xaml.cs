@@ -14,6 +14,7 @@ namespace MatStatApp
 
             DialogService.RegisterDialog<DialogChart, DialogChartViewModel>();
             DialogService.RegisterDialog<EmpChart, EmpChartViewModel>();
+            DialogService.RegisterDialog<ErrorDialog, ErrorDialogViewModel>();
 
             MainContextMenu.PlacementTarget = Menu;
         }

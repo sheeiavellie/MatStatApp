@@ -71,8 +71,15 @@ namespace MatStatApp.ViewModels
         private void OnSelectFileCommandExecuted(object p)
         {
             var path = _getFileService.GetFilePath();
-            Sample.sample = _getDataService.GetData(path);
-            TextField = string.Join(", ", Sample.sample);
+            if (_getDataService.GetData(path) != null)
+            {
+                Sample.sample = _getDataService.GetData(path);
+                TextField = string.Join(", ", Sample.sample);
+            }            
+            else
+            {
+
+            }            
         }
 
         public ICommand FunctionCommand { get; }
@@ -80,24 +87,32 @@ namespace MatStatApp.ViewModels
         private bool CanFunctionCommandExecute(object p) => true;
         private void OnFunctionCommandExecuted(object p)
         {
-            string methodName = p.ToString();
-
-            var parameters = new object[] { Sample.sample };
-            var t = Type.GetType(Assembly.CreateQualifiedName("MatStat", "MatStat.Functions"));
-            object classInst = Activator.CreateInstance(t);
-
-
-            var ret = t.GetMethod(methodName).Invoke(classInst, parameters);
-            var result = "";
-
-            if (ret is double[])
+            if(Sample.sample != null)
             {
-                result = String.Join(", ", (double[])ret);
+                string methodName = p.ToString();
+
+                var parameters = new object[] { Sample.sample };
+                var t = Type.GetType(Assembly.CreateQualifiedName("MatStat", "MatStat.Functions"));
+                object classInst = Activator.CreateInstance(t);
+
+
+                var ret = t.GetMethod(methodName).Invoke(classInst, parameters);
+                var result = "";
+
+                if (ret is double[])
+                {
+                    result = String.Join(", ", (double[])ret);
+                }
+                else
+                    result = Convert.ToString(ret);
+
+                ResField = result;
             }
             else
-                result = Convert.ToString(ret);
-
-            ResField = result;
+            {
+                _dialogService.ShowDialog<ErrorDialogViewModel>(result => { var test = result; });
+            }
+            
         }
 
         public ICommand ShowGraphCommand { get; }
@@ -107,15 +122,21 @@ namespace MatStatApp.ViewModels
         {
             string type = p.ToString();
 
-            if(type == "Gist")
+            if(Sample.sample != null)
             {
-                _dialogService.ShowDialog<DialogChartViewModel>(result => { var test = result; });
+                if (type == "Gist")
+                {
+                    _dialogService.ShowDialog<DialogChartViewModel>(result => { var test = result; });
+                }
+                else
+                {
+                    _dialogService.ShowDialog<EmpChartViewModel>(result => { var test = result; });
+                }
             }
             else
             {
-                _dialogService.ShowDialog<EmpChartViewModel>(result => { var test = result; });
+                _dialogService.ShowDialog<ErrorDialogViewModel>(result => { var test = result; });
             }
-
         }
 
         #endregion

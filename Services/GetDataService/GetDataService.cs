@@ -11,12 +11,17 @@ namespace MatStatApp.Services.GetDataService
     {
         public double[] GetData(string filePath)
         {
-            String input = File.ReadAllText(filePath);
-            input = input.Trim(' ');
+            if(filePath != null)
+            {
+                String input = File.ReadAllText(filePath);
+                input = input.Trim(' ');
 
-            var array = Array.ConvertAll(input.Split('\u002C'), Double.Parse);
+                var array = Array.ConvertAll(input.Split('\u002C'), Double.Parse);
 
-            return array;
+                return array;
+            }
+
+            return null;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-    <Window x:Class="MatStatApp.MainWindow"
+﻿<Window x:Class="MatStatApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -23,10 +22,12 @@
     </Window.DataContext>
 
 
-    <Border CornerRadius="30">
+    <Border CornerRadius="30" Background="#FFAEC9">
+        <!-->
         <Border.Background>
             <ImageBrush ImageSource="/MatStatApp;component/Data/Resources/Pictures/112.png"/>
         </Border.Background>
+        <-->
         <Grid>
             <Border Background="White" Height="30" CornerRadius="30 30 0 0" VerticalAlignment="Top">
                 <Grid>
@@ -81,16 +82,43 @@
                             </EventTrigger>
                         </Button.Triggers>
                     </Button>
-                    
+
                     <Button Style="{StaticResource closeButton}" Margin=" 0 0 10 0" HorizontalAlignment="Right"
                             Command="{Binding CloseApplicationCommand}">
                         <Button.Tag>
                             <Icon:PackIconMaterial Kind="Close"/>
-                        </Button.Tag>                        
+                        </Button.Tag>
                     </Button>
-                </Grid>                
+                </Grid>
             </Border>
-            
+            <Border CornerRadius="30" Margin="15 45 15 15" Background="White">
+                <Border Background="#FFAEC9" Margin="7.5" CornerRadius="30">
+
+                </Border>
+            </Border>
+            <Border Background="White" CornerRadius="30"
+                    Margin="30,60,308,30">
+                <StackPanel>
+                    <TextBlock Text="Выборка:" HorizontalAlignment="Center" Margin="0 15 0 0"/>
+                    <TextBlock Text="{Binding TextField}" HorizontalAlignment="Center" Margin="0 15 0 0"
+                               Height="440" Width="230"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </StackPanel>
+                
+            </Border>
+
+            <Border Background="White" CornerRadius="30"
+                    Margin="308,60,30,30">
+                <StackPanel>
+                    <TextBlock Text="Результат функции:" HorizontalAlignment="Center" Margin="0 15 0 0"/>
+                    <TextBlock Text="{Binding ResField}" HorizontalAlignment="Center" Margin="0 15 0 0"
+                               Height="440" Width="230"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            <!--
             <Border CornerRadius="0 0 30 30" VerticalAlignment="Bottom" 
                 Background="White"
                 Height="75">
@@ -112,7 +140,8 @@
 
 
             </Border>
+             -->
         </Grid>
     </Border>
-    
+
 </Window>

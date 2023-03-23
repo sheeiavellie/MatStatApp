@@ -8,6 +8,6 @@ namespace MatStatApp.Models
 {
     public static class Sample
     {
-        public static double[] sample = { 1 };
+        public static double[] sample = null;
     }
 }

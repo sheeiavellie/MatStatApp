@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="Data\Resources\Pictures\112.png" />
     <None Remove="Data\Resources\Pictures\321.jpg" />
+    <None Remove="Data\Resources\Pictures\eze.png" />
+    <None Remove="Data\Resources\Pictures\pruh.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,15 +28,24 @@
   <ItemGroup>
     <Resource Include="Data\Resources\Pictures\112.png" />
     <Resource Include="Data\Resources\Pictures\321.jpg" />
+    <Resource Include="Data\Resources\Pictures\eze.png" />
+    <Resource Include="Data\Resources\Pictures\pruh.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Windows\ErrorDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Windows\EmpChart.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\Windows\ErrorDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Windows\EmpChart.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
