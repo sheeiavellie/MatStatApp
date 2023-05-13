@@ -9,5 +9,7 @@ namespace MatStatApp.Services.GetDataService
     internal interface IGetDataService
     {
         public double[] GetData(string filePath);
+        //public string GetNu(string filePath);
+        //public string GetSigma(string filePath);
     }
 }

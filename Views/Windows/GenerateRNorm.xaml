@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="MatStatApp.Views.Windows.GenerateRNorm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+             xmlns:local="clr-namespace:MatStatApp.Views.Windows"
+             xmlns:vm="clr-namespace:MatStatApp.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             MinWidth="500"
+             MinHeight="500"
+             MaxHeight="500"
+             MaxWidth="500">
+    <UserControl.DataContext>
+        <vm:GenerateRNormViewModel/>
+    </UserControl.DataContext>
+    <Border CornerRadius="25" Background="#FFAEC9">
+        <StackPanel>
+            <Border CornerRadius="25 25 0 0" Height="25" Background="White">
+                <Button Style="{StaticResource closeButton}" Margin=" 0 -1 8 0" HorizontalAlignment="Right" 
+                        Command="{Binding CloseApplicationCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type prism:DialogWindow}}}">
+                    <Button.Tag>
+                        <Icon:PackIconMaterial Kind="Close"/>
+                    </Button.Tag>
+                </Button>
+            </Border>
+            <Border Width="475" Height="450" Background="White" Margin="0 12.5 0 0" CornerRadius="25">
+                <StackPanel>
+                    <Border Margin="0 50 0 0" Height="75" Width="200" CornerRadius="25" Background="#FFAEC9">
+                        <StackPanel Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <StackPanel>
+                                <TextBlock Text="Nu" Margin="0 5 0 5" FontWeight="SemiBold" Foreground="White"/>
+                                <TextBlock Text="Sigma" Margin="0 0 0 5" FontWeight="SemiBold" Foreground="White"/>
+                                <TextBlock Text="Size" Margin="0 0 0 5" FontWeight="SemiBold" Foreground="White"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    
+                                    <TextBox x:Name="Nu" TextChanged="notEmpty" PreviewTextInput="PreviewTextInput" Text="{Binding Nu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="100"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Justify"
+                                 Margin="10 5 0 5"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBox x:Name="Sigma" TextChanged="notEmpty" PreviewTextInput="PreviewTextInput" Text="{Binding Sigma, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="100"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Justify"
+                                 Margin="10 0 0 5"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBox TextChanged="notEmpty" PreviewTextInput="PreviewTextInput" Text="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="100"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Justify"
+                                 Margin="10 0 0 5"/>
+                                </StackPanel>
+                            </StackPanel>                            
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#FFAEC9" CornerRadius="25" Height="50" Width="300" Margin="0 10 0 0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Width="100" Margin="10" Command="{Binding GenerateCommand}">
+                                <TextBlock Text="Сгенерировать"/>
+                            </Button>
+                            <Button Width="100" Margin="10" Command="{Binding SaveCommand}">
+                                <TextBlock Text="Сохранить"/>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>                
+            </Border>
+        </StackPanel>        
+    </Border>
+    
+</UserControl>

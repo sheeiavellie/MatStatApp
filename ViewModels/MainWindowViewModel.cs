@@ -74,11 +74,7 @@ namespace MatStatApp.ViewModels
             if (_getDataService.GetData(path) != null)
             {
                 Sample.sample = _getDataService.GetData(path);
-                TextField = string.Join(", ", Sample.sample);
-            }            
-            else
-            {
-
+                TextField = string.Join("; ", Sample.sample);
             }            
         }
 
@@ -122,7 +118,7 @@ namespace MatStatApp.ViewModels
         {
             string type = p.ToString();
 
-            if(Sample.sample != null)
+            /*if(Sample.sample != null)
             {
                 if (type == "Gist")
                 {
@@ -136,6 +132,36 @@ namespace MatStatApp.ViewModels
             else
             {
                 _dialogService.ShowDialog<ErrorDialogViewModel>(result => { var test = result; });
+            }*/
+
+            switch(type)
+            {
+                case "Gist":
+                    if (Sample.sample != null)
+                        _dialogService.ShowDialog<DialogChartViewModel>(result => { var test = result; });
+                    else
+                        _dialogService.ShowDialog<ErrorDialogViewModel>(result => { var test = result; });
+                    break;
+
+                case "EmFunc":
+                    if (Sample.sample != null)
+                        _dialogService.ShowDialog<EmpChartViewModel>(result => { var test = result; });
+                    else
+                        _dialogService.ShowDialog<ErrorDialogViewModel>(result => { var test = result; });
+                    break;
+
+                case "GenerateRNorm":
+                    _dialogService.ShowDialog<GenerateRNormViewModel>(result => { var test = result; });
+                    break;
+
+                case "Dens":
+                    if (Sample.sample != null)
+                    {
+                        _dialogService.ShowDialog<DensityChartViewModel>(result => { var test = result; });
+                    }                        
+                    else
+                        _dialogService.ShowDialog<ErrorDialogViewModel>(result => { var test = result; });
+                    break;
             }
         }
 

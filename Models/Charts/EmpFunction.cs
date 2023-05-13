@@ -32,7 +32,7 @@ namespace MatStatApp.Models.Charts
         public Axis[] XAxes { get; set; }
         public Axis[] YAxes { get; set; }
 
-        public EmpFunction(Dictionary<double, double[]> data)
+        public EmpFunction(Dictionary<double, double[]> data, List<Tuple<double, double>> theor_data)
         {
             var set = new List<LineSeries<ObservablePoint>>();
             foreach (var series in data)
@@ -46,14 +46,32 @@ namespace MatStatApp.Models.Charts
                     },
                     Stroke = new SolidColorPaint
                     {
-                        Color = SKColors.Magenta,
+                        Color = SKColors.Green,
                         StrokeCap = SKStrokeCap.Round,
-                        StrokeThickness = 1.5F,
+                        //StrokeThickness = 1.5F,
                     },
                     GeometrySize = 0,
                     Fill = null
                 });
             }
+
+            var point = new List<ObservablePoint>();
+
+            foreach(var e in theor_data)
+            {
+                point.Add(new ObservablePoint(e.Item1, e.Item2));
+            }
+
+            set.Add(new LineSeries<ObservablePoint>
+            {
+                Values = point.ToArray(),
+                GeometrySize = 0,
+                LineSmoothness = 1,
+                Stroke = new SolidColorPaint
+                {
+                    Color = SKColors.Red
+                }
+            });
 
             Series = set.ToArray();
 

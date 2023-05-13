@@ -18,7 +18,10 @@
     <PackageReference Include="Emoji.Wpf" Version="0.3.4" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.701" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.1.2" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="PythonPlotter" Version="0.3.2" />
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.63" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Windows\DensityChart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\GenerateRNorm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Windows\ErrorDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -42,6 +51,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\Windows\DensityChart.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Windows\GenerateRNorm.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\Windows\ErrorDialog.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

@@ -53,7 +53,14 @@ namespace MatStatApp.ViewModels
 
             var data = fc.GetEmpData(Sample.sample);
 
-            emp = new EmpFunction(data);
+            var theor_data = new List<Tuple<double, double>>();
+
+            foreach(var e in Sample.sample.OrderBy(i => i))
+            {
+                theor_data.Add(new Tuple<double, double>(e, fc.Calculate_Theor(e, fc.GetMedian(Sample.sample), fc.GetVarianceStandartDeviation(Sample.sample))));
+            }
+
+            emp = new EmpFunction(data, theor_data);
 
             var x = new List<Tuple<string, double>>();
 

@@ -9,5 +9,6 @@ namespace MatStatApp.Models
     public static class Sample
     {
         public static double[] sample = null;
+        public static double[] generated_sample = null;
     }
 }

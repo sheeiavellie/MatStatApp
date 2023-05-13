@@ -42,7 +42,11 @@
                                 <MenuItem Header="Ввести данные" Command="{Binding SelectFileCommand}"/>
                                 <MenuItem Header="Открыть графики">
                                     <MenuItem Header="Гистограмма" Command="{Binding ShowGraphCommand}" CommandParameter="Gist"/>
-                                    <MenuItem Header="Эмпиричиская функция" Command="{Binding ShowGraphCommand}" CommandParameter="EmFunc"/>
+                                    <MenuItem Header="Эмпирическая и Теоретическая функции" Command="{Binding ShowGraphCommand}" CommandParameter="EmFunc"/>
+                                    <MenuItem Header="Плотность рапределения" Command="{Binding ShowGraphCommand}" CommandParameter="Dens"/>
+                                </MenuItem>
+                                <MenuItem Header="Генерация данных">
+                                    <MenuItem Header="rnorm" Command="{Binding ShowGraphCommand}" CommandParameter="GenerateRNorm"/>
                                 </MenuItem>
                                 <MenuItem Header="Выполнить функцию" ItemsSource="{Binding Methods}" >
                                     <MenuItem.ItemTemplate >
