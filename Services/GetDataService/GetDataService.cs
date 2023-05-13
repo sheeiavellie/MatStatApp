@@ -40,8 +40,9 @@ namespace MatStatApp.Services.GetDataService
         public double[] GetData(string filePath)
         {
             var raw = LoadData(filePath);
-            var array = Array.ConvertAll(raw[0].Split('\u002C'), ParseDouble);
-            return array;
+            if(raw != null)
+                return Array.ConvertAll(raw[0].Split('\u002C'), ParseDouble);
+            return null;
         }
 
         /*public string GetNu(string filePath)

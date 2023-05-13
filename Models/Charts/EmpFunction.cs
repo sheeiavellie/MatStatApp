@@ -57,10 +57,14 @@ namespace MatStatApp.Models.Charts
 
             var point = new List<ObservablePoint>();
 
+            point.Add(new ObservablePoint(Sample.sample.Min() > 0 ? 0 : Sample.sample.Min() + Sample.sample.Min(), 0));
+
             foreach(var e in theor_data)
             {
                 point.Add(new ObservablePoint(e.Item1, e.Item2));
             }
+
+            point.Add(new ObservablePoint(Sample.sample.Max() > 0 ? Sample.sample.Max() + Sample.sample.Max() : 0, 1));
 
             set.Add(new LineSeries<ObservablePoint>
             {
